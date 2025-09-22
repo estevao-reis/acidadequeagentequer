@@ -1,0 +1,73 @@
+import { createClient } from '@/lib/supabase/server';
+import { ProposalCard } from '@/components/cards/ProposalCard';
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+} from "@/components/ui/breadcrumb"
+
+export const revalidate = 60;
+
+export default async function PropostasPage() {
+  const supabase = await createClient();
+
+  const { data: proposals, error } = await supabase
+    .from('Proposals')
+    .select(`
+      id,
+      created_at,
+      title,
+      description,
+      citizen:Citizens ( name, region:AdministrativeRegions ( name ) ),
+      subcategory:Subcategories ( name, sector:Sectors ( name ) )
+    `)
+    .order('created_at', { ascending: false });
+
+  if (error) {
+    console.error('Erro ao buscar propostas:', error);
+    return (
+      <div className="container mx-auto p-8 text-center">
+        <p className="text-destructive">Não foi possível carregar as propostas no momento. Tente novamente mais tarde.</p>
+      </div>
+  ); }
+
+  return (
+    <main className="py-12 bg-muted/20">
+      <div className="container mx-auto px-4">
+        <header className="mb-10">
+            <Breadcrumb>
+              <BreadcrumbList>
+                <BreadcrumbItem>
+                  <BreadcrumbLink href="/">Início</BreadcrumbLink>
+                </BreadcrumbItem>
+                <BreadcrumbSeparator />
+                <BreadcrumbItem>
+                  <BreadcrumbPage>Propostas da Comunidade</BreadcrumbPage>
+                </BreadcrumbItem>
+              </BreadcrumbList>
+            </Breadcrumb>
+            <h1 className="text-4xl font-bold tracking-tighter mt-4">Propostas da Comunidade</h1>
+            <p className="mt-2 text-muted-foreground">
+                Veja as ideias enviadas pela população para construirmos um DF melhor.
+            </p>
+        </header>
+
+        {proposals && proposals.length > 0 ? (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {proposals.map((proposal) => (
+              // @ts-ignore
+              <ProposalCard key={proposal.id} proposal={proposal} />
+            ))}
+          </div>
+        ) : (
+          <div className="text-center py-20 border-dashed border-2 rounded-xl">
+             <h2 className="text-2xl font-semibold">Nenhuma proposta enviada ainda.</h2>
+             <p className="text-muted-foreground mt-2">Seja o primeiro a compartilhar sua ideia!</p>
+          </div>
+        )}
+      </div>
+    </main>
+); }
