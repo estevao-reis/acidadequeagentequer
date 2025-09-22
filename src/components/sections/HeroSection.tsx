@@ -4,7 +4,7 @@ import Link from 'next/link';
 
 export function HeroSection() {
   return (
-    <section className="relative w-full py-20 md:py-32 lg:py-40 text-white overflow-hidden">
+    <section className="relative w-full py-20 md:py-32 lg:py-40 overflow-hidden">
       <div className="absolute inset-0 z-0">
         <Image
           src="/hero-background.jpg"
@@ -18,10 +18,10 @@ export function HeroSection() {
 
       <div className="container relative z-10 mx-auto text-center">
         <div className="max-w-3xl mx-auto">
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tighter animate-in fade-in slide-in-from-bottom-4 duration-1000">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tighter text-foreground animate-in fade-in slide-in-from-bottom-4 duration-1000">
             A cidade que queremos, <span className="text-primary">construída por todos nós.</span>
           </h1>
-          <p className="mt-6 text-lg text-white/80 animate-in fade-in slide-in-from-bottom-8 duration-1000 delay-200">
+          <p className="mt-6 text-lg text-muted-foreground animate-in fade-in slide-in-from-bottom-8 duration-1000 delay-200">
             Sua voz é a ferramenta mais poderosa para a mudança. Participe, proponha e ajude a transformar as demandas da população em políticas públicas reais para o Distrito Federal.
           </p>
           <div className="mt-8 animate-in fade-in slide-in-from-bottom-12 duration-1000 delay-300">

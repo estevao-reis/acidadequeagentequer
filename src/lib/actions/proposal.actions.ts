@@ -25,7 +25,7 @@ export async function submitProposal(formData: FormData): Promise<ActionResult> 
   }
 
   try {
-    let { data: citizen, error: citizenError } = await supabase
+    const { data: existingCitizen, error: citizenError } = await supabase
       .from('Citizens')
       .select('id')
       .eq('email', rawData.email)
@@ -34,6 +34,8 @@ export async function submitProposal(formData: FormData): Promise<ActionResult> 
     if (citizenError && citizenError.code !== 'PGRST116') {
       throw new Error(`Erro ao verificar cidadão: ${citizenError.message}`);
     }
+
+    let citizen = existingCitizen;
 
     if (!citizen) {
       const { data: newCitizen, error: newCitizenError } = await supabase

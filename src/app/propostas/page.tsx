@@ -8,6 +8,7 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb"
+import type { ProposalWithDetails } from '@/types';
 
 export const revalidate = 60;
 
@@ -21,22 +22,23 @@ export default async function PropostasPage() {
       created_at,
       title,
       description,
-      citizen:Citizens ( name, region:AdministrativeRegions ( name ) ),
-      subcategory:Subcategories ( name, sector:Sectors ( name ) )
+      citizen:Citizens!inner ( name, region:AdministrativeRegions ( name ) ),
+      subcategory:Subcategories!inner ( name, sector:Sectors!inner ( name ) )
     `)
-    .order('created_at', { ascending: false });
+    .order('created_at', { ascending: false })
+    .returns<ProposalWithDetails[]>();
 
   if (error) {
     console.error('Erro ao buscar propostas:', error);
     return (
-      <div className="container mx-auto p-8 text-center">
+      <div className="container text-center py-10">
         <p className="text-destructive">Não foi possível carregar as propostas no momento. Tente novamente mais tarde.</p>
       </div>
   ); }
 
   return (
     <main className="py-12 bg-muted/20">
-      <div className="container mx-auto px-4">
+      <div className="container">
         <header className="mb-10">
             <Breadcrumb>
               <BreadcrumbList>
@@ -56,9 +58,8 @@ export default async function PropostasPage() {
         </header>
 
         {proposals && proposals.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 items-stretch">
             {proposals.map((proposal) => (
-              // @ts-ignore
               <ProposalCard key={proposal.id} proposal={proposal} />
             ))}
           </div>

@@ -8,8 +8,8 @@ import { Footer } from "@/components/layout/Footer";
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
 
 export const metadata: Metadata = {
-  title: "DF Participativo | Construindo o Futuro da Nossa Cidade",
-  description: "Uma plataforma para coletar e organizar propostas da população, fortalecendo a democracia participativa no Distrito Federal.",
+  title: "A Cidade Que A Gente Quer | Construindo o Futuro da Nossa Cidade",
+  description: "Sua voz é a ferramenta mais poderosa para a mudança. Participe, proponha e ajude a transformar as demandas da população em políticas públicas reais para o Distrito Federal.",
 };
 
 export default function RootLayout({
