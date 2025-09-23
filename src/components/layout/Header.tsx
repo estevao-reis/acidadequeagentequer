@@ -7,11 +7,11 @@ import { navLinks } from '@/config/nav';
 export function Header() {
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="container flex h-16 items-center">
+      <div className="container mx-auto flex h-16 items-center">
         <div className="flex items-center gap-6 md:gap-10 mr-auto">
           <Link href="/" className="flex items-center space-x-3">
             <Image
-              src="/logo.jpg"
+              src="/logo.png"
               alt="Logo A Cidade Que A Gente Quer"
               width={40}
               height={40}

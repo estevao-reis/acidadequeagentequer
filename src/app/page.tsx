@@ -24,7 +24,7 @@ export default async function HomePage() {
       <SectorsSection sectors={sectors || []} />
       
       <section id="participe" className="py-20 bg-muted/40 scroll-mt-16">
-        <div className="container">
+        <div className="container mx-auto">
           <ProposalForm
             sectors={sectors || []}
             subcategories={subcategories || []}

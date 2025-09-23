@@ -24,7 +24,7 @@ export function ProposalCard({ proposal }: ProposalCardProps) {
       <CardContent className="flex-grow">
         <p className="text-muted-foreground line-clamp-4">{proposal.description}</p>
       </CardContent>
-      <CardFooter className="flex flex-col items-start gap-2 text-sm text-muted-foreground pt-4 border-t mt-auto">
+      <CardFooter className="flex flex-col items-start gap-2 text-sm text-muted-foreground pt-4 border-t mt-auto px-6 pb-6">
         <span><strong>Autor:</strong> {authorName} ({authorRegion})</span>
         <span><strong>Enviada em:</strong> {new Date(proposal.created_at).toLocaleDateString('pt-BR')}</span>
       </CardFooter>

@@ -56,11 +56,12 @@ export function ProposalForm({ sectors, subcategories, regions }: ProposalFormPr
 
   return (
     <form ref={formRef} action={handleAction} className="w-full max-w-2xl mx-auto bg-card p-8 rounded-2xl shadow-xl border">
-      <div className="text-center mb-8">
-        <h3 className="text-2xl font-bold">Compartilhe sua Ideia</h3>
-        <p className="text-muted-foreground">Juntos, podemos construir um futuro melhor para o DF.</p>
+      <div className="text-center mb-10">
+          <h3 className="text-3xl font-bold">Compartilhe sua Ideia</h3>
+          <p className="text-muted-foreground mt-2">Juntos, podemos construir um futuro melhor para o DF.</p>
       </div>
-      <div className="grid gap-6">
+      
+      <div className="grid gap-4">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div className="grid gap-2">
             <Label htmlFor="name">Seu Nome</Label>

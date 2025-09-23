@@ -18,7 +18,7 @@ export function HeroSection() {
 
       <div className="container relative z-10 mx-auto text-center">
         <div className="max-w-3xl mx-auto">
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tighter text-foreground animate-in fade-in slide-in-from-bottom-4 duration-1000">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tighter text-foreground animate-in fade-in slide-in-from-bottom-4 duration-1000">
             A cidade que queremos, <span className="text-primary">construída por todos nós.</span>
           </h1>
           <p className="mt-6 text-lg text-muted-foreground animate-in fade-in slide-in-from-bottom-8 duration-1000 delay-200">
