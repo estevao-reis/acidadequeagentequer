@@ -13,7 +13,7 @@ export default async function HomePage() {
     { data: subcategories },
     { data: regions }
   ] = await Promise.all([
-    supabase.from('Sectors').select('id, name, description').order('id'),
+    supabase.from('Sectors').select('id, name, description, slug').order('id'),
     supabase.from('Subcategories').select('id, name, sector_id').order('name'),
     supabase.from('AdministrativeRegions').select('id, name').order('name')
   ]);

@@ -39,8 +39,8 @@ export default async function PropostasPage() {
   return (
     <main className="py-12 bg-muted/20">
       <div className="container">
-        <header className="mb-10">
-            <Breadcrumb>
+        <header className="mb-10 max-w-3xl mx-auto text-center">
+            <Breadcrumb className="justify-center">
               <BreadcrumbList>
                 <BreadcrumbItem>
                   <BreadcrumbLink href="/">Início</BreadcrumbLink>

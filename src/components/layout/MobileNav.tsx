@@ -21,11 +21,12 @@ export function MobileNav() {
           <span className="sr-only">Abrir Menu</span>
         </Button>
       </SheetTrigger>
+        
       <SheetContent side="left" className="w-[300px]">
         <div className="flex flex-col gap-8 pt-4">
             <Link href="/" onClick={closeSheet} className="flex items-center space-x-2">
                 <Image
-                  src="/logo.jpg"
+                  src="/logo.png"
                   alt="Logo A Cidade Que A Gente Quer"
                   width={35}
                   height={35}
