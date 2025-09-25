@@ -55,13 +55,17 @@ export function ProposalForm({ sectors, subcategories, regions }: ProposalFormPr
   };
 
   return (
-    <form ref={formRef} action={handleAction} className="w-full max-w-2xl mx-auto bg-card p-8 rounded-2xl shadow-xl border">
+    <form 
+      ref={formRef} 
+      action={handleAction}
+      className="w-full max-w-2xl mx-auto bg-card p-6 md:p-8 rounded-2xl shadow-xl border"
+    >
       <div className="text-center mb-10">
           <h3 className="text-3xl font-bold">Compartilhe sua Ideia</h3>
           <p className="text-muted-foreground mt-2">Juntos, podemos construir um futuro melhor para o DF.</p>
       </div>
-      
-      <div className="grid gap-4">
+
+      <div className="grid gap-6">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div className="grid gap-2">
             <Label htmlFor="name">Seu Nome</Label>
@@ -76,7 +80,9 @@ export function ProposalForm({ sectors, subcategories, regions }: ProposalFormPr
         <div className="grid gap-2">
             <Label htmlFor="region_id">Sua Região Administrativa</Label>
             <Select name="region_id" required>
-                <SelectTrigger><SelectValue placeholder="Selecione sua RA" /></SelectTrigger>
+                <SelectTrigger className="w-full">
+                    <SelectValue placeholder="Selecione sua RA" />
+                </SelectTrigger>
                 <SelectContent>
                     {regions.map(region => <SelectItem key={region.id} value={region.id}>{region.name}</SelectItem>)}
                 </SelectContent>
@@ -87,7 +93,9 @@ export function ProposalForm({ sectors, subcategories, regions }: ProposalFormPr
            <div className="grid gap-2">
               <Label htmlFor="sector_id">Setor Principal</Label>
               <Select name="sector_id" required onValueChange={setSelectedSector}>
-                  <SelectTrigger><SelectValue placeholder="Escolha um setor" /></SelectTrigger>
+                  <SelectTrigger className="w-full">
+                    <SelectValue placeholder="Escolha um setor" />
+                  </SelectTrigger>
                   <SelectContent>
                       {sectors.map(sector => <SelectItem key={sector.id} value={String(sector.id)}>{sector.name}</SelectItem>)}
                   </SelectContent>
@@ -96,7 +104,9 @@ export function ProposalForm({ sectors, subcategories, regions }: ProposalFormPr
             <div className="grid gap-2">
               <Label htmlFor="subcategory_id">Tema Específico</Label>
               <Select name="subcategory_id" required disabled={!selectedSector}>
-                  <SelectTrigger><SelectValue placeholder="Escolha um tema" /></SelectTrigger>
+                  <SelectTrigger className="w-full">
+                    <SelectValue placeholder="Escolha um tema" />
+                  </SelectTrigger>
                   <SelectContent>
                       {filteredSubcategories.map(sub => <SelectItem key={sub.id} value={String(sub.id)}>{sub.name}</SelectItem>)}
                   </SelectContent>
