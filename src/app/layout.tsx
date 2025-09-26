@@ -7,10 +7,49 @@ import { Footer } from "@/components/layout/Footer";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
 
+const siteUrl = "https://acidadequeagentequer.vercel.app";
+const title = "A Cidade Que A Gente Quer";
+const description = "Sua voz é a ferramenta para a mudança. Participe, proponha e ajude a construir o plano de governo de 2026 para o Distrito Federal.";
+
 export const metadata: Metadata = {
-  title: "A Cidade Que A Gente Quer | Construindo o Futuro da Nossa Cidade",
-  description: "Sua voz é a ferramenta mais poderosa para a mudança. Participe, proponha e ajude a transformar as demandas da população em políticas públicas reais para o Distrito Federal.",
-};
+  metadataBase: new URL(siteUrl),
+
+  title: {
+    default: title,
+    template: `%s | ${title}`,
+  },
+  description: description,
+
+  icons: {
+    icon: "/favicon.ico",
+    shortcut: "/logo.png",
+    apple: "/logo.png",
+  },
+
+  openGraph: {
+    title: title,
+    description: description,
+    url: siteUrl,
+    siteName: title,
+    images: [
+      {
+        url: '/logo.png',
+        width: 1014,
+        height: 1014,
+        alt: `Logo do projeto ${title}`,
+      },
+    ],
+    locale: 'pt_BR',
+    type: 'website',
+  },
+
+  twitter: {
+    card: 'summary_large_image',
+    title: title,
+    description: description,
+    images: ['/logo.png'],
+}, };
+
 
 export default function RootLayout({
   children,
