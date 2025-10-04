@@ -70,7 +70,7 @@ export default async function RootLayout({
   ]);
 
   return (
-    <html lang="pt-BR">
+    <html lang="pt-BR" className="scroll-smooth">
       <body className={`${inter.variable} antialiased flex flex-col min-h-screen bg-background text-foreground`}>
         <ProposalModalProvider
           sectors={sectors || []}
