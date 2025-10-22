@@ -56,8 +56,7 @@ function SubmitButton() {
       </div>
       <div className="absolute inset-0 rounded-lg bg-gradient-to-r from-primary to-primary/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10" />
     </Button>
-  );
-}
+); }
 
 export function ProposalForm({ sectors, subcategories, regions, initialSectorId }: ProposalFormProps) {
   const formRef = useRef<HTMLFormElement>(null);
@@ -94,8 +93,7 @@ export function ProposalForm({ sectors, subcategories, regions, initialSectorId 
       setSelectedSector('');
       setCharacterCount(0);
       formRef.current?.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
+  } };
 
   const handleDescriptionChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setCharacterCount(e.target.value.length);
@@ -136,9 +134,9 @@ export function ProposalForm({ sectors, subcategories, regions, initialSectorId 
                     name="phone_number"
                     type="tel"
                     required
-                    placeholder="(61) 99999-9999"
-                    pattern="\([0-9]{2}\) [0-9]{5}-[0-9]{4}"
-                    title="Formato esperado: (XX) XXXXX-XXXX"
+                    placeholder="61999999999"
+                    pattern="[0-9]{10,11}"
+                    title="Apenas números, de 10 a 11 dígitos"
                   />
                 </div>
               </div>

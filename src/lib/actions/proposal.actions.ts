@@ -13,7 +13,7 @@ export async function submitProposal(formData: FormData): Promise<ActionResult> 
 
   const rawData = {
     name: formData.get('name') as string,
-    phone_number: formData.get('phone_number') as string,
+    phone_number: (formData.get('phone_number') as string || '').replace(/\D/g, ''),
     region_id: formData.get('region_id') as string,
     subcategory_id: formData.get('subcategory_id') as string,
     title: formData.get('title') as string,

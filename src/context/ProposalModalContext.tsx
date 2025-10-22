@@ -1,7 +1,7 @@
 'use client';
 
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
-import { Sheet, SheetContent } from '@/components/ui/sheet';
+import { Sheet, SheetContent, SheetHeader, SheetTitle } from '@/components/ui/sheet';
 import { ProposalForm } from '@/components/forms/ProposalForm';
 import { cn } from '@/lib/utils';
 
@@ -68,6 +68,9 @@ export function ProposalModalProvider({
               : "w-full md:w-1/2 lg:max-w-xl"
           )}
         >
+          <SheetHeader className="sr-only">
+            <SheetTitle>Formulário de Envio de Proposta</SheetTitle>
+          </SheetHeader>
           <div className="flex-grow overflow-y-auto">
             <div className="p-6 md:p-8">
               <ProposalForm
