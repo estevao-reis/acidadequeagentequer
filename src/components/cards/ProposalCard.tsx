@@ -151,26 +151,32 @@ export function ProposalCard({
         </div>
       </CardContent>
 
-      <CardFooter className="flex flex-wrap items-center justify-between gap-x-4 gap-y-2 text-sm pt-4 border-t bg-muted/20 px-6 pb-6">
+      <CardFooter className="flex flex-col gap-3 items-center text-sm pt-4 border-t bg-muted/20 px-0 pb-6">
+        {/* Linha do nome */}
         <div className="flex items-center gap-1.5 text-muted-foreground min-w-0" title={`${authorName} (${authorRegion})`}>
           <User className="size-4 flex-shrink-0 text-foreground/60" />
-          <span className="font-medium text-foreground/80 truncate">{authorName}</span>
-          <span className="mx-1 text-foreground/40">·</span>
-          <MapPin className="size-4 flex-shrink-0" />
-          <span className="truncate">{authorRegion}</span>
+          <span className="font-medium text-foreground/80 truncate text-base">{authorName}</span>
         </div>
-        
-        <div className="flex items-center gap-1.5 text-muted-foreground">
-          <Calendar className="size-4" />
-          <time dateTime={proposal.created_at}>
-            {new Date(proposal.created_at).toLocaleDateString('pt-BR', {
-              day: '2-digit',
-              month: '2-digit',
-              year: 'numeric'
-            })}
-          </time>
+
+        {/* Linha de informações secundárias */}
+        <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-muted-foreground">
+          <div className="flex items-center gap-1.5">
+            <Calendar className="size-3" />
+            <time dateTime={proposal.created_at}>
+              {new Date(proposal.created_at).toLocaleDateString('pt-BR', {
+                day: '2-digit',
+                month: '2-digit',
+                year: 'numeric'
+              })}
+            </time>
+          </div>
+          <div className="flex items-center gap-1.5 min-w-0" title={authorRegion}>
+            <MapPin className="size-3 flex-shrink-0" />
+            <span className="truncate">{authorRegion}</span>
+          </div>
         </div>
       </CardFooter>
+
 
       <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10" />
     </Card>
