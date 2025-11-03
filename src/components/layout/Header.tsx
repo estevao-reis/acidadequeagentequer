@@ -7,12 +7,13 @@ import { MobileNav } from './MobileNav';
 import { navLinks } from '@/config/nav';
 import { useProposalModal } from '@/context/ProposalModalContext';
 import { useState, useEffect, useRef } from 'react';
-import { Lightbulb } from 'lucide-react';
+import { Lightbulb, Heart } from 'lucide-react'; // Importar Heart
 import { cn } from '@/lib/utils';
 
 export function Header() {
-  const { openModal } = useProposalModal();
+  const { openModal, openSupportModal } = useProposalModal(); // Obter a nova função
   const [isScrolled, setIsScrolled] = useState(false);
+  // ... (resto dos hooks useState, useRef, useEffect)
   const [isVisible, setIsVisible] = useState(true);
   const [scrollProgress, setScrollProgress] = useState(0);
   const lastScrollY = useRef(0);
@@ -42,6 +43,7 @@ export function Header() {
 
   return (
     <header className={cn(
+      // ... (classes de estilo do header)
       "fixed top-0 left-0 right-0 z-50 w-full transition-all duration-300 ease-out",
       isVisible ? 'translate-y-0' : '-translate-y-full',
       isScrolled 
@@ -49,6 +51,7 @@ export function Header() {
         : 'bg-transparent border-b border-transparent'
     )}>
       <div className="container mx-auto flex h-16 md:h-20 items-center px-4 transition-height duration-300">
+        {/* ... (Logo e Nav links) */}
         <div className="flex items-center gap-8 md:gap-12 mr-auto">
           <Link 
             href="/" 
@@ -89,7 +92,19 @@ export function Header() {
           </nav>
         </div>
 
+
         <div className="flex items-center gap-3">
+          {/* Botão de Apoio (Novo) */}
+          <Button
+            variant="outline"
+            onClick={() => openSupportModal()}
+            className="hidden md:inline-flex group transition-all duration-300 hover:scale-105"
+          >
+            <Heart className="mr-2 size-4 text-primary transition-transform group-hover:scale-110" />
+            Apoiar
+          </Button>
+
+          {/* Botão de Proposta (Existente) */}
           <Button 
             onClick={() => openModal()}
             className="hidden md:inline-flex group relative overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-lg"
@@ -103,7 +118,7 @@ export function Header() {
         </div>
       </div>
 
-      {/* Progresso */}
+      {/* ... (Barra de Progresso) */}
       <div className="absolute bottom-0 left-0 w-full h-0.5 bg-primary/10">
         <div 
           className="h-full bg-gradient-to-r from-primary to-primary/80"
@@ -111,4 +126,5 @@ export function Header() {
         />
       </div>
     </header>
-); }
+  );
+}

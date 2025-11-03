@@ -3,6 +3,7 @@
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from '@/components/ui/sheet';
 import { ProposalForm } from '@/components/forms/ProposalForm';
+import { SupportForm } from '@/components/forms/SupportForm';
 import { cn } from '@/lib/utils';
 
 function useMediaQuery(query: string): boolean {
@@ -23,12 +24,14 @@ function useMediaQuery(query: string): boolean {
   return matches;
 }
 
+
 type Sector = { id: number; name: string; };
 type Subcategory = { id: number; name: string; sector_id: number; };
 type Region = { id: string; name: string; };
 
 interface ProposalModalContextType {
   openModal: (sectorId?: number) => void;
+  openSupportModal: () => void;
 }
 
 const ProposalModalContext = createContext<ProposalModalContextType | undefined>(undefined);
@@ -46,19 +49,25 @@ export function ProposalModalProvider({
   subcategories,
   regions,
 }: ProposalModalProviderProps) {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isProposalOpen, setIsProposalOpen] = useState(false);
+  const [isSupportOpen, setIsSupportOpen] = useState(false);
   const [selectedSectorId, setSelectedSectorId] = useState<string | undefined>(undefined);
   const isMobile = useMediaQuery('(max-width: 768px)');
 
   const openModal = (sectorId?: number) => {
     setSelectedSectorId(sectorId ? String(sectorId) : undefined);
-    setIsOpen(true);
+    setIsProposalOpen(true);
+  };
+
+  const openSupportModal = () => {
+    setIsSupportOpen(true);
   };
 
   return (
-    <ProposalModalContext.Provider value={{ openModal }}>
+    <ProposalModalContext.Provider value={{ openModal, openSupportModal }}>
       {children}
-      <Sheet open={isOpen} onOpenChange={setIsOpen}>
+      
+      <Sheet open={isProposalOpen} onOpenChange={setIsProposalOpen}>
         <SheetContent
           side={isMobile ? 'bottom' : 'right'}
           className={cn(
@@ -79,6 +88,27 @@ export function ProposalModalProvider({
                 regions={regions}
                 initialSectorId={selectedSectorId}
               />
+            </div>
+          </div>
+        </SheetContent>
+      </Sheet>
+
+      <Sheet open={isSupportOpen} onOpenChange={setIsSupportOpen}>
+        <SheetContent
+          side={isMobile ? 'bottom' : 'right'}
+          className={cn(
+            "flex flex-col p-0",
+            isMobile
+              ? "h-[75vh] rounded-t-2xl"
+              : "w-full md:w-1/2 lg:max-w-xl"
+          )}
+        >
+          <SheetHeader className="sr-only">
+            <SheetTitle>Formulário de Apoio ao Projeto</SheetTitle>
+          </SheetHeader>
+          <div className="flex-grow overflow-y-auto">
+            <div className="p-6 md:p-8">
+              <SupportForm regions={regions} />
             </div>
           </div>
         </SheetContent>

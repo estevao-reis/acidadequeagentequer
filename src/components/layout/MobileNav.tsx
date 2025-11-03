@@ -12,7 +12,8 @@ import {
   TrendingUp,
   Network,
   Shield,
-  Landmark
+  Landmark,
+  Heart
 } from "lucide-react";
 import { Sheet, SheetContent, SheetFooter, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
@@ -24,27 +25,8 @@ type NavLink = {
   label: string;
   icon: React.ElementType;
   description?: string;
+  action?: () => void;
 };
-
-const mobileNavLinks: NavLink[] = [
-  {
-    href: "/",
-    label: "Início",
-    icon: Home,
-    description: "Voltar para a página principal"
-  },
-  {
-    href: "/#setores",
-    label: "Áreas de Foco",
-    icon: BookMarked,
-    description: "Explore nossas áreas estratégicas"
-  },
-  {
-    href: "/propostas",
-    label: "Propostas",
-    icon: Users,
-    description: "Veja as ideias da comunidade"
-}, ];
 
 const quickActions = [
   {
@@ -78,14 +60,48 @@ const quickActions = [
     color: "text-indigo-500"
 }, ];
 
+
 export function MobileNav() {
   const [open, setOpen] = useState(false);
-  const { openModal } = useProposalModal();
+  const { openModal, openSupportModal } = useProposalModal();
 
   const closeSheetAndOpenModal = (sectorId?: number) => {
     setOpen(false);
     setTimeout(() => openModal(sectorId), 300);
   };
+
+  const closeSheetAndOpenSupportModal = () => {
+    setOpen(false);
+    setTimeout(() => openSupportModal(), 300);
+  };
+
+  const mobileNavLinks: NavLink[] = [
+    {
+      href: "/",
+      label: "Início",
+      icon: Home,
+      description: "Voltar para a página principal"
+    },
+    {
+      href: "/#setores",
+      label: "Áreas de Foco",
+      icon: BookMarked,
+      description: "Explore nossas áreas estratégicas"
+    },
+    {
+      href: "/propostas",
+      label: "Propostas",
+      icon: Users,
+      description: "Veja as ideias da comunidade"
+    },
+    {
+      href: "#",
+      label: "Apoiar o Projeto",
+      icon: Heart,
+      description: "Registre seu apoio",
+      action: closeSheetAndOpenSupportModal
+  }, ];
+
 
   return (
     <Sheet open={open} onOpenChange={setOpen}>
@@ -100,6 +116,7 @@ export function MobileNav() {
           <div className="absolute -top-1 -right-1 size-2 bg-primary rounded-full animate-pulse" />
         </Button>
       </SheetTrigger>
+
 
       <SheetContent 
         side="left" 
@@ -128,29 +145,41 @@ export function MobileNav() {
         <div className="flex flex-col flex-grow overflow-y-auto">
           <nav className="p-6 pb-4">
             <div className="space-y-2">
-              {mobileNavLinks.map((link) => (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  onClick={() => setOpen(false)}
-                  className="flex items-center gap-4 rounded-xl px-4 py-3 text-base font-medium transition-all duration-200 group hover:bg-accent hover:scale-[1.02] active:scale-95"
-                >
-                  <div className="p-2 rounded-lg bg-primary/10 group-hover:bg-primary/20 transition-colors">
-                    <link.icon className="size-5 text-primary" />
-                  </div>
-                  <div className="flex flex-col">
-                    <span className="text-foreground">{link.label}</span>
-                    {link.description && (
-                      <span className="text-xs text-muted-foreground mt-0.5">
-                        {link.description}
-                      </span>
-                    )}
-                  </div>
-                </Link>
-              ))}
+              {mobileNavLinks.map((link) => {
+                const Comp = link.href === "#" ? "button" : Link;
+                return (
+                  <Comp
+                    key={link.label}
+                    href={link.href}
+                    onClick={() => {
+                      if (link.action) link.action();
+                      else setOpen(false);
+                    }}
+                    className="flex items-center gap-4 rounded-xl px-4 py-3 text-base font-medium transition-all duration-200 group hover:bg-accent hover:scale-[1.02] active:scale-95 w-full text-left"
+                  >
+                    <div className={cn(
+                      "p-2 rounded-lg bg-primary/10 group-hover:bg-primary/20 transition-colors",
+                      link.icon === Heart && "bg-rose-500/10"
+                    )}>
+                      <link.icon className={cn(
+                        "size-5 text-primary",
+                        link.icon === Heart && "text-rose-500"
+                      )} />
+                    </div>
+                    <div className="flex flex-col">
+                      <span className="text-foreground">{link.label}</span>
+                      {link.description && (
+                        <span className="text-xs text-muted-foreground mt-0.5">
+                          {link.description}
+                        </span>
+                      )}
+                    </div>
+                  </Comp>
+              ); })}
             </div>
           </nav>
 
+          {/* ... (quickActions) */}
           <div className="px-6 py-4 border-t border-border/50">
             <h3 className="text-sm font-semibold text-muted-foreground mb-3 px-2">
               Contribuir por Setor
@@ -171,6 +200,7 @@ export function MobileNav() {
             </div>
           </div>
 
+
           <div className="flex-grow" />
         </div>
 
@@ -185,7 +215,7 @@ export function MobileNav() {
             <div className="absolute inset-0 bg-gradient-to-r from-primary to-primary/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10" />
           </Button>
           <p className="text-center text-xs text-muted-foreground mt-3 px-4">
-            Sua ideia pode transformar nossa cidade. Compartilhe agora!
+            Sua ideia ou apoio podem transformar nossa cidade. Participe!
           </p>
         </SheetFooter>
       </SheetContent>
