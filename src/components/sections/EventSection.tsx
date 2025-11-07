@@ -32,7 +32,7 @@ export function EventSection() {
             {/* Imagem do Convite */}
             <div
               className={cn(
-                "w-full h-full min-h-[800px] lg:min-h-[700px] relative",
+                "w-full h-full min-h-[1000px] sm:min-h-[1100px] md:min-h-[1300px] lg:min-h-[700px] relative",
                 "order-2 lg:order-1",
                 "bg-muted/30",
                 "p-4 md:p-8",
