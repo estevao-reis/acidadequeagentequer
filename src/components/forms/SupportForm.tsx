@@ -8,7 +8,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { User, Send, CheckCircle, AlertCircle, Heart } from 'lucide-react';
+import { User, CheckCircle, AlertCircle, CalendarCheck } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 type Region = { id: string; name: string; };
@@ -30,12 +30,12 @@ function SubmitButton() {
         {pending ? (
           <>
             <div className="size-4 border-2 border-current border-t-transparent rounded-full animate-spin" />
-            Registrando...
+            Confirmando...
           </>
         ) : (
           <>
-            <Heart className="size-5 transition-transform group-hover:scale-110" />
-            Quero Apoiar
+            <CalendarCheck className="size-5 transition-transform group-hover:scale-110" />
+            Confirmar Presença
           </>
         )}
       </div>
@@ -55,6 +55,12 @@ export function SupportForm({ regions }: SupportFormProps) {
     setIsSuccess(result.success);
 
     if (result.success) {
+      // 3. Altere as mensagens de sucesso
+      if (result.message.includes("já está registrado")) {
+        setMessage("Obrigado! Seu nome já estava na lista de presença.");
+      } else {
+        setMessage("Presença confirmada com sucesso! Nos vemos em Nova Colina.");
+      }
       formRef.current?.reset();
       formRef.current?.scrollIntoView({ behavior: 'smooth' });
   } };
@@ -63,11 +69,12 @@ export function SupportForm({ regions }: SupportFormProps) {
     <div className="w-full max-w-2xl mx-auto">
       <Card className="border-0 shadow-none bg-transparent mb-8">
         <CardHeader className="text-center pb-4">
+
           <CardTitle className="text-3xl md:text-4xl font-bold bg-gradient-to-br from-foreground from-60% to-foreground/70 bg-clip-text text-transparent">
-            Apoie o Projeto
+            Confirme sua Presença
           </CardTitle>
           <CardDescription className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Deixe seu contato e faça parte da construção de um futuro melhor para nossa cidade!
+            Garanta seu lugar na nossa primeira edição em Nova Colina! Preencha abaixo.
           </CardDescription>
         </CardHeader>
       </Card>
@@ -82,15 +89,16 @@ export function SupportForm({ regions }: SupportFormProps) {
               </h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="space-y-2">
-                  <Label htmlFor="name_support">Nome Completo</Label>
-                  <Input id="name_support" name="name" required placeholder="Seu nome" />
+
+                  <Label htmlFor="name_support_event">Nome Completo</Label>
+                  <Input id="name_support_event" name="name" required placeholder="Seu nome" />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="phone_number_support" className="flex items-center gap-2">
+                  <Label htmlFor="phone_number_support_event" className="flex items-center gap-2">
                     Telefone (com DDD)
                   </Label>
                   <Input
-                    id="phone_number_support"
+                    id="phone_number_support_event"
                     name="phone_number"
                     type="tel"
                     required
@@ -101,11 +109,11 @@ export function SupportForm({ regions }: SupportFormProps) {
                 </div>
               </div>
               <div className="space-y-2">
-                <Label htmlFor="region_id_support" className="flex items-center gap-2">
+                <Label htmlFor="region_id_support_event" className="flex items-center gap-2">
                   Sua Região Administrativa
                 </Label>
                 <Select name="region_id" required>
-                  <SelectTrigger id="region_id_support" className="w-full">
+                  <SelectTrigger id="region_id_support_event" className="w-full">
                     <SelectValue placeholder="Selecione sua RA" />
                   </SelectTrigger>
                   <SelectContent>

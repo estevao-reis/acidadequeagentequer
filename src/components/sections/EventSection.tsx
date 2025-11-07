@@ -1,13 +1,15 @@
 'use client';
 
 import Image from 'next/image';
-import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { ArrowRight, Calendar, MapPin } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { useProposalModal } from '@/context/ProposalModalContext';
 
 export function EventSection() {
+  const { openSupportModal } = useProposalModal();
+
   return (
     <section id="evento" className="py-20 sm:py-24 md:py-32 bg-muted/20">
       <div className="container mx-auto px-4">
@@ -66,13 +68,13 @@ export function EventSection() {
               </h3>
               
               <p className="text-lg text-muted-foreground mb-6 leading-relaxed">
-                O projeto "A Cidade que a Gente Quer" é um convite à ação! Teremos nossa primeira edição em Nova Colina para caminhar, dialogar e construir juntos.
+                O projeto "A Cidade que a Gente Quer" é um convite à ação! Teremos nossa primeira edição em Nova Colina para dialogar e construir juntos.
               </p>
 
               <div className="flex flex-col sm:flex-row sm:items-center gap-4 text-foreground/90 mb-8">
                 <div className="flex items-center gap-2">
                   <MapPin className="size-5 text-primary" />
-                  <span className="font-medium">Primeira Edição: Nova Colina</span>
+                  <span className="font-medium">Local: Nova Colina</span>
                 </div>
                 <span className="hidden sm:block text-muted-foreground">|</span>
                 <div className="flex items-center gap-2">
@@ -81,18 +83,14 @@ export function EventSection() {
                 </div>
               </div>
 
-              <Button asChild size="lg" className="group w-full sm:w-fit text-lg py-6 px-8">
-                <Link 
-                  href="https://juntos-por-mais.vercel.app/eventos/a-cidade-que-a-gente-quer" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                >
-                  Confirme sua Presença
-                  <ArrowRight className="ml-2 size-5 transition-transform group-hover:translate-x-1" />
-                </Link>
+              <Button 
+                size="lg" 
+                className="group w-full sm:w-fit text-lg py-6 px-8"
+                onClick={openSupportModal}
+              >
+                Confirme sua Presença
+                <ArrowRight className="ml-2 size-5 transition-transform group-hover:translate-x-1" />
               </Button>
-              
-              <span className="text-lg text-muted-foreground mt-6 leading-relaxed">Saiba mais clicando no botão acima.</span>
             </div>
 
           </div>

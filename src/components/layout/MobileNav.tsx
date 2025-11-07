@@ -95,10 +95,10 @@ export function MobileNav() {
       description: "Veja as ideias da comunidade"
     },
     {
-      href: "#",
-      label: "Apoiar o Projeto",
+      href: "/#evento",
+      label: "Confirme sua Presença",
       icon: Heart,
-      description: "Registre seu apoio",
+      description: "Na nossa primeira edição",
       action: closeSheetAndOpenSupportModal
   }, ];
 

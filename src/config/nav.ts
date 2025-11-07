@@ -11,4 +11,8 @@ export const navLinks: NavLink[] = [
   {
     href: "/propostas",
     label: "Propostas",
+  },
+  {
+    href: "/#evento",
+    label: "Encontros",
 }, ];

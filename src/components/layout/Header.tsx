@@ -99,7 +99,7 @@ export function Header() {
             className="hidden md:inline-flex group transition-all duration-300 hover:scale-105"
           >
             <Heart className="mr-2 size-4 text-primary transition-transform group-hover:scale-110" />
-            Apoiar
+            Confirmar Presença
           </Button>
 
           {/* Botão de Proposta (Existente) */}
