@@ -10,7 +10,7 @@ import { createClient } from '@/lib/supabase/server';
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
 
 const siteUrl = "https://acidadequeagentequer.vercel.app";
-const title = "A Cidade Que A Gente Quer";
+const title = "A Cidade que a Gente Quer";
 const description = "Sua voz é a ferramenta para a mudança. Participe, proponha e ajude a construir o plano de governo de 2026 para o Distrito Federal.";
 
 export const metadata: Metadata = {

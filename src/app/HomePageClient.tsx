@@ -2,6 +2,7 @@
 
 import { HeroSection } from '@/components/sections/HeroSection';
 import { SectorsSection } from '@/components/sections/SectorsSection';
+import { EventSection } from '@/components/sections/EventSection';
 import { useProposalModal } from '@/context/ProposalModalContext';
 
 type Sector = { id: number; name: string; description: string | null; slug: string; };
@@ -21,5 +22,7 @@ export function HomePageClient({ sectors }: HomePageClientProps) {
         sectors={sectors}
         onSectorClick={(sectorId) => openModal(sectorId)}
       />
+
+      <EventSection />
     </>
 ); }

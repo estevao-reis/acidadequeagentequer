@@ -127,13 +127,13 @@ export function MobileNav() {
             <Link href="/" onClick={() => setOpen(false)} className="flex items-center gap-3 group">
               <Image
                 src="/logo.png"
-                alt="Logo A Cidade Que A Gente Quer"
+                alt="Logo A Cidade que a Gente Quer"
                 width={44}
                 height={44}
                 className="rounded-lg"
               />
               <div className="flex flex-col">
-                <span className="font-bold text-lg leading-tight">A Cidade Que A Gente Quer</span>
+                <span className="font-bold text-lg leading-tight">A Cidade que a Gente Quer</span>
                 <span className="text-xs text-muted-foreground font-normal mt-0.5">
                   Planejando o Futuro
                 </span>

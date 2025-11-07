@@ -7,13 +7,12 @@ import { MobileNav } from './MobileNav';
 import { navLinks } from '@/config/nav';
 import { useProposalModal } from '@/context/ProposalModalContext';
 import { useState, useEffect, useRef } from 'react';
-import { Lightbulb, Heart } from 'lucide-react'; // Importar Heart
+import { Lightbulb, Heart } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 export function Header() {
-  const { openModal, openSupportModal } = useProposalModal(); // Obter a nova função
+  const { openModal, openSupportModal } = useProposalModal();
   const [isScrolled, setIsScrolled] = useState(false);
-  // ... (resto dos hooks useState, useRef, useEffect)
   const [isVisible, setIsVisible] = useState(true);
   const [scrollProgress, setScrollProgress] = useState(0);
   const lastScrollY = useRef(0);
@@ -43,7 +42,6 @@ export function Header() {
 
   return (
     <header className={cn(
-      // ... (classes de estilo do header)
       "fixed top-0 left-0 right-0 z-50 w-full transition-all duration-300 ease-out",
       isVisible ? 'translate-y-0' : '-translate-y-full',
       isScrolled 
@@ -59,7 +57,7 @@ export function Header() {
           >
             <Image
               src="/logo.png"
-              alt="Logo A Cidade Que A Gente Quer"
+              alt="Logo A Cidade que a Gente Quer"
               width={44}
               height={44}
               className="rounded-lg transition-all duration-300 group-hover:shadow-lg"
@@ -67,7 +65,7 @@ export function Header() {
             />
             <div className="flex flex-col">
               <span className="font-bold hidden sm:inline-block text-lg bg-gradient-to-r from-foreground to-foreground/80 bg-clip-text text-transparent">
-                A Cidade Que A Gente Quer
+                A Cidade que a Gente Quer
               </span>
               <span className="hidden md:block text-xs text-muted-foreground font-normal mt-0.5">
                 Planejando o Futuro
