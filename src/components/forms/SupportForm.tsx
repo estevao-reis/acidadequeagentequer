@@ -11,11 +11,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { User, CheckCircle, AlertCircle, CalendarCheck } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
-type Region = { id: string; name: string; };
-
-interface SupportFormProps {
-  regions: Region[];
-}
+const EVENT_ID = '00000000-0000-0000-0000-000000000001'; 
 
 function SubmitButton() {
   const { pending } = useFormStatus();
@@ -43,6 +39,10 @@ function SubmitButton() {
     </Button>
 ); }
 
+interface SupportFormProps {
+  regions: { id: string; name: string; }[];
+}
+
 export function SupportForm({ regions }: SupportFormProps) {
   const formRef = useRef<HTMLFormElement>(null);
   const [message, setMessage] = useState<string | null>(null);
@@ -55,13 +55,9 @@ export function SupportForm({ regions }: SupportFormProps) {
     setIsSuccess(result.success);
 
     if (result.success) {
-      // 3. Altere as mensagens de sucesso
-      if (result.message.includes("já está registrado")) {
-        setMessage("Obrigado! Seu nome já estava na lista de presença.");
-      } else {
-        setMessage("Presença confirmada com sucesso! Nos vemos em Nova Colina.");
+      if (!result.message.includes("já está confirmado")) {
+         formRef.current?.reset();
       }
-      formRef.current?.reset();
       formRef.current?.scrollIntoView({ behavior: 'smooth' });
   } };
 
@@ -69,7 +65,6 @@ export function SupportForm({ regions }: SupportFormProps) {
     <div className="w-full max-w-2xl mx-auto">
       <Card className="border-0 shadow-none bg-transparent mb-8">
         <CardHeader className="text-center pb-4">
-
           <CardTitle className="text-3xl md:text-4xl font-bold bg-gradient-to-br from-foreground from-60% to-foreground/70 bg-clip-text text-transparent">
             Confirme sua Presença
           </CardTitle>
@@ -81,15 +76,16 @@ export function SupportForm({ regions }: SupportFormProps) {
 
       <Card>
         <CardContent className="p-6 md:p-8">
-          <form ref={formRef} action={handleAction} className="space-y-6">
+          <form ref={formRef} action={handleAction} className="space-y-6">            
+            <input type="hidden" name="event_id" value={EVENT_ID} />
+
             <div className="space-y-4">
-              <h3 className="text-lg font-semibold flex items-center gap-2 border-b pb-2">
+               <h3 className="text-lg font-semibold flex items-center gap-2 border-b pb-2">
                 <User className="size-5 text-primary" />
                 Sobre Você
               </h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="space-y-2">
-
                   <Label htmlFor="name_support_event">Nome Completo</Label>
                   <Input id="name_support_event" name="name" required placeholder="Seu nome" />
                 </div>
