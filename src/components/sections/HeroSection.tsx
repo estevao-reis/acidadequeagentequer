@@ -24,25 +24,7 @@ export function HeroSection({ onButtonClick }: HeroSectionProps) {
 
   return (
     <section className="relative w-full min-h-screen flex items-center justify-center overflow-hidden">
-
-
       <div className="absolute inset-0 z-0">
-        {/* Vídeo background (opcional - adicione um vídeo MP4 na pasta public) */}
-        {/* <video
-          ref={videoRef}
-          autoPlay
-          muted
-          loop
-          playsInline
-          preload="metadata"
-          className="w-full h-full object-cover opacity-20"
-          poster="/hero-background.png"
-        >
-          <source src="/hero-bg-video.mp4" type="video/mp4" />
-        </video> */}
-        
-
-
         <Image
           src="/hero-background.png"
           alt="Background da cidade"
